@@ -64,7 +64,9 @@ def build(src_dir, tgt_dir):
     shutil.move(src_dir, tgt_dir)
     write_file("%s/exec" % tgt_dir, """#!/bin/sh
 cd "$(dirname $0)"
-exec jolie exec__.ol
+export PATH=$PATH:/opt/java/openjdk/bin
+export JOLIE_HOME=/usr/lib/jolie
+jolie exec__.ol
 """)
 
 if __name__ == '__main__':

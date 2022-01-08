@@ -1,48 +1,38 @@
-from console import Console
-from console import ConsoleInputInterface
-
+from console import Console, ConsoleInputInterface
 from file import File
-
-include "OW_ActionInterface.iol"
-
-outputPort OWAction { interfaces: OWActionAPI }
-
-inputPort ConsoleInputPort {
-  location: "local"
-  interfaces: ConsoleInputInterface
-}
-
-embedded {
-  Jolie: "OW_Action.ol" in OWAction
-}
+from .owaction import OWAction
 
 service OWActionLauncher {
-  embed Console as Console  
-  embed File as File
+	embed Console as console  
+	embed File as file
+	embed OWAction as owAction
+
+	inputPort ConsoleInputPort {
+		location: "local"
+		interfaces: ConsoleInputInterface
+	}
 	
-  init {
-		registerForInput@Console()()
+	init {
+		registerForInput@console()()
 	}
 
-  main
-  {
-    keepRunning = true
-    while( keepRunning ){
-      print@Console( "Type something (ENTER to quit): " )()
-      in( param )
-      if( param != "" ) {
-        action@OWAction( param )( greeting )
-        println@Console( greeting )()
-        /*
-        writeFile@File( {
-            filename = "/dev/fd/3"
-            content = greeting
-            append = 1
-        } )()    
-        */
-      } else {
-        keepRunning = false
-      }
-    }
-  }
+	main {
+		keepRunning = true
+		while( keepRunning ) {
+			print@console( "Type something (ENTER to quit): " )()
+			in( param )
+			if( param != "" ) {
+				action@owAction( param )( greeting )
+				println@console( greeting )()
+				writeFile@file( {
+						filename = "/dev/fd/3"
+						content = greeting
+						append = 1
+						format = "json"
+				} )()
+			} else {
+				keepRunning = false
+			}
+		}
+	}
 }

@@ -1,3 +1,5 @@
+execution { concurrent }
+
 include "OW_ActionInterface.iol"
 from json_utils import JsonUtils
 

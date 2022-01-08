@@ -21,7 +21,7 @@ service OWActionLauncher {
 		while( keepRunning ) {
 			print@console( "Type something (ENTER to quit): " )()
 			in( param )
-			if( param != "" ) {
+			if( param instanceof string && param != "" ) {
 				action@owAction( param )( greeting )
 				println@console( greeting )()
 				writeFile@file( {

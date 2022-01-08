@@ -19,14 +19,13 @@ service OWActionLauncher {
 	main {
 		keepRunning = true
 		while( keepRunning ) {
-			print@console( "Type something (ENTER to quit): " )()
 			in( param )
 			if( param instanceof string && param != "" ) {
 				action@owAction( param )( greeting )
 				println@console( greeting )()
 				writeFile@file( {
 						filename = "/dev/fd/3"
-						content = greeting
+						content = greeting 
 						append = 1
 						format = "json"
 				} )()

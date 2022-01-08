@@ -55,12 +55,13 @@ def main():
 
 def dockerHost():
     dockerHost = 'localhost'
-    if 'DOCKER_HOST' in os.environ:
-        try:
-            dockerHost = re.compile('tcp://(.*):[\d]+').findall(os.environ['DOCKER_HOST'])[0]
-        except Exception:
-            print('cannot determine docker host from %s' % os.environ['DOCKER_HOST'])
-            sys.exit(-1)
+    # if 'DOCKER_HOST' in os.environ:
+    #     try:
+    #         print(os.environ['DOCKER_HOST'])
+    #         dockerHost = re.compile('unix://(.*):[\d]+').findall(os.environ['DOCKER_HOST'])[0]
+    #     except Exception:
+    #         print('cannot determine docker host from %s' % os.environ['DOCKER_HOST'])
+    #         sys.exit(-1)
     return dockerHost
 
 def containerRoute(args, path):

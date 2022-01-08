@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-IMG=actionloop-demo-python-v3.7:latest
+IMG=actionloop-jolie-v1.10:latest
 INVOKE=python ../tools/invoke.py
 PREFIX=docker.io/openwhisk
 

@@ -43,17 +43,17 @@ def sources(launcher, main, src_dir):
     # move exec in the right place if exists
     src_file = "%s/exec" % src_dir
     if exists(src_file):
-        copy_replace(src_file, "%s/main__.ol" % src_dir)
+        copy_replace(src_file, "%s/owaction.ol" % src_dir)
 
     # move main.ol in the right place if it exists
     src_file = "%s/main.ol" % src_dir
     if exists(src_file):
-        copy_replace(src_file, "%s/main__.ol" % src_dir)
+        copy_replace(src_file, "%s/owaction.ol" % src_dir)
 
-    # write the boilerplate in a temp dir
-    copy_replace(launcher, "%s/exec__.ol" % src_dir, // TODO aggiungere parametri per Jolie
-          "from main__ import main as main",
-          "from main__ import %s as main" % main )
+    # write the boilerplate in a temp dir    
+    copy_replace(launcher, "%s/exec__.ol" % src_dir,
+          "from .owaction import OWAction",
+          "from .owaction import OWAction" )
 
 # compile sources
 def build(src_dir, tgt_dir):

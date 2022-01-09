@@ -1,13 +1,20 @@
-from .owactioninterface import OWActionAPI
+from json_utils import JsonUtils
+
+interface OWActionAPI {
+	RequestResponse: action( string )( string )
+}
 
 service OWAction {
 	execution: concurrent
 
-  inputPort OWActionInput {
-    location: "local"
-    interfaces: OWActionAPI
-  }
-  
+	embed JsonUtils as jsonUtils
+
+	inputPort OWActionInput {
+		location: "local"
+		// protocol: http { format = "json" }
+		interfaces: OWActionAPI
+	}
+
 	main {  
 		action( name )( "Hello, " + name )
 	}

@@ -20,7 +20,6 @@ RUN mkdir -p /proxy/bin /proxy/lib /proxy/action
 WORKDIR /proxy
 COPY --from=builder bin/proxy /bin/proxy
 ADD lib/launcher.ol /proxy/lib/launcher.ol
-ADD lib/owactioninterface.ol /proxy/lib/owactioninterface.ol
 ADD bin/compile /proxy/bin/compile
 RUN apk update && apk add python3
 ENV OW_COMPILER=/proxy/bin/compile

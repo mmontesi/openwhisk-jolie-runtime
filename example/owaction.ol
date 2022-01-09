@@ -1,13 +1,19 @@
 from json_utils import JsonUtils
+from console import Console
+
+type OWActionType {
+  name: string
+}
 
 interface OWActionAPI {
-	RequestResponse: action( string )( string )
+	RequestResponse: action( OWActionType )( string )
 }
 
 service OWAction {
 	execution: concurrent
 
 	embed JsonUtils as jsonUtils
+  embed Console as Console
 
 	inputPort OWActionInput {
 		location: "local"
@@ -15,7 +21,9 @@ service OWAction {
 		interfaces: OWActionAPI
 	}
 
-	main {  
-		action( name )( "Hello, " + name )
+	main {      
+		action( param )( response ) {
+      response = "Hello, " + param.name
+    }
 	}
 }

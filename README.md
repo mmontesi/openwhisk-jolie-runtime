@@ -18,6 +18,8 @@
 -->
 # Jolie language OpenWhisk Runtime (ActionLoop based)
 
+An OpenWhisk runtime for Jolie language, based on the ActionLoop proxy.
 
+See [official documentation](https://github.com/apache/openwhisk/blob/master/docs/actions-actionloop.md).
 
 

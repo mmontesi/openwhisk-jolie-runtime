@@ -34,6 +34,11 @@ service OWActionLauncher {
 						append = 1
 						format = "json"
 				} )()
+				writeFile@file( {
+						filename = "/dev/fd/3"
+						content = "\n"
+						append = 1
+				} )()
 			} else {
 				keepRunning = false
 			}
